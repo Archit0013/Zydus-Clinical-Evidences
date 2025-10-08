@@ -1,2 +1,101 @@
-./Grafalon_Compendium_A Handbook on Clinical Evidences from India.pdf
-./Product Guide ODVenta.pdf
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Choose a File</title>
+  <style>
+    :root { --brand:#0f62fe; --bg:#f7f8fa; --text:#1f2937; --muted:#6b7280; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; background: var(--bg); color: var(--text); }
+    .wrap { max-width: 720px; margin: 40px auto; padding: 20px; }
+    h1 { margin: 0 0 10px; font-size: 1.6rem; font-weight: 700; }
+    p.lead { color: var(--muted); margin: 0 0 24px; }
+    .tabs { display: flex; gap: 8px; background: #fff; padding: 8px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .tab-btn { flex: 1; cursor: pointer; border: 1px solid #e5e7eb; background: #fff; padding: 12px; border-radius: 10px; font-weight: 600; text-align: center; transition: all .2s ease; }
+    .tab-btn[aria-selected="true"] { border-color: var(--brand); outline: none; box-shadow: 0 0 0 3px rgba(15,98,254,.15); }
+    .tab-btn:hover { transform: translateY(-1px); }
+    .panel { display: none; background: #fff; padding: 18px; margin-top: 10px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .panel[aria-hidden="false"] { display: block; }
+    .file-meta { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+    .file-title { font-size: 1.1rem; font-weight: 700; }
+    .file-desc { color: var(--muted); margin: 4px 0 0; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 12px 16px; border-radius: 10px; font-weight: 700; text-decoration: none;
+      border: 1px solid #e5e7eb; background: #fff; transition: all .2s ease;
+    }
+    .btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .btn:hover { transform: translateY(-1px); }
+    footer { text-align: center; color: var(--muted); margin: 20px 0 0; font-size: .9rem; }
+    @media (max-width:520px){ .file-meta { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>📂 Choose a file to view or download</h1>
+    <p class="lead">Tap a tab below, then use the buttons to open or download.</p>
+
+    <div role="tablist" aria-label="Files" class="tabs">
+      <button id="t1" class="tab-btn" role="tab" aria-controls="p1" aria-selected="true">File 1 (PDF)</button>
+      <button id="t2" class="tab-btn" role="tab" aria-controls="p2" aria-selected="false">File 2 (DOCX)</button>
+      <button id="t3" class="tab-btn" role="tab" aria-controls="p3" aria-selected="false">File 3 (PPTX)</button>
+    </div>
+
+    <!-- Panel 1 -->
+    <section id="p1" class="panel" role="tabpanel" aria-labelledby="t1" aria-hidden="false">
+      <div class="file-meta">
+        <div>
+          <div class="file-title">File 1 (PDF)</div>
+          <p class="file-desc">Best for direct viewing in browser. </p>
+        </div>
+        <div class="actions">
+          <a class="btn" href="./files/file1.pdf" target="_blank" rel="noopener">Open</a>
+          <a class="btn primary" href="./files/file1.pdf" download="file1.pdf">Download</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 2 -->
+    <section id="p2" class="panel" role="tabpanel" aria-labelledby="t2" aria-hidden="true">
+      <div class="file-meta">
+        <div>
+          <div class="file-title">File 2 (DOCX)</div>
+          <p class="file-desc">Opens in MS Word or Google Docs.</p>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="./files/file2.docx" download="file2.docx">Download</a>
+          <a class="btn" href="./files/file2.docx" target="_blank" rel="noopener">Open (may download)</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 3 -->
+    <section id="p3" class="panel" role="tabpanel" aria-labelledby="t3" aria-hidden="true">
+      <div class="file-meta">
+        <div>
+          <div class="file-title">File 3 (PPTX)</div>
+          <p class="file-desc">Opens in PowerPoint or Keynote (converted).</p>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="./files/file3.pptx" download="file3.pptx">Download</a>
+          <a class="btn" href="./files/file3.pptx" target="_blank" rel="noopener">Open (may download)</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>© Your Company</footer>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('[role="tab"]');
+    const panels = document.querySelectorAll('[role="tabpanel"]');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.setAttribute('aria-selected', String(t===tab)));
+        panels.forEach(p => p.setAttribute('aria-hidden', String('#'+p.id !== '#'+tab.getAttribute('aria-controls'))));
+      });
+    });
+  </script>
+</body>
+</html>
